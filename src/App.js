@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  function Countdown() {
+    const [timeLeft, setTimeLeft] = useState(30);
+
+    const decrementTimeLeft = () => {
+      if (timeLeft <= 15 && timeLeft > 10) {
+        setTimeLeft((timeLeft) => timeLeft - 1);
+      } else if (timeLeft === 10) {
+        setTimeLeft((timeLeft) => timeLeft - 1);
+        alert("5 seconds remaining");
+      } else if (timeLeft <= 5 && timeLeft > 0) {
+        setTimeLeft((timeLeft) => timeLeft - 1);
+      } else if (timeLeft === 0) {
+        clearInterval(timerId);
+        alert("Time is up!");
+      } else {
+        setTimeLeft((timeLeft) => timeLeft - 1);
+      }
+    };
+
+    const timerId = setInterval(decrementTimeLeft, 1000);
+
+    return (
+      <div>
+        <h1>Countdown: {timeLeft} seconds</h1>
+      </div>
+    );
+  }
 }
 
 export default App;
